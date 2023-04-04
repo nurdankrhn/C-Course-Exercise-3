@@ -1,25 +1,26 @@
 #include <stdio.h>
-#include <math.h>
-
-double bailey_borwein_plouffe_pi(int k);
+#define cube(n)		((n) * (n) * (n))
+double somayaji_pi(int n);
 
 int main() {
-	int k;
 	
-	printf("k: ");
-	scanf("%d", &k);
+	int n;
 	
-	printf("Pi = %f", bailey_borwein_plouffe_pi(k));
+	printf("n: ");
+	scanf("%d", &n);
+	
+	printf("Pi = %f", somayaji_pi(n));
+	
 	return 0;
 }
 
-double bailey_borwein_plouffe_pi(int k) {
-	double pi , a = 1.0 / 16;
-	int i, b;
+double somayaji_pi(int n) {
 	
-	for(i = 0; i <= k; i++) {
-		b = 8 * i;
-		pi += pow(a, i) * ( 4.0/(b + 1) - 2.0/(b + 4) - 1.0/(b + 5) - 1.0/(b + 6) ); 
+	double pi = 3;
+	int i, val; 
+	for(i = 1, val = 3; i <= n; i++, val +=2) {
+		(i % 2) == 0 ? (pi -= (double)4 / ( cube(val) - val)) : (pi += (double)4 / ( cube(val) - val));
 	}
+	
 	return pi;
 }
